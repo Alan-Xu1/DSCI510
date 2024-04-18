@@ -34,3 +34,30 @@ df = get_covid_data()
 df = df.loc[:,['date','state','actuals.cases']]
 covid_sql(df)
 
+def get_state_data(year):
+    url = f"https://fred.stlouisfed.org/release/tables?rid=455&eid=821184&od={year}-10-01#"
+    try:
+        r=requests.get(url)
+    except:
+        raise Exception("Failed to access webpage") 
+    soup = BeautifulSoup(r.content)
+    return soup
+
+def extract_state_data():
+    for y in (2021,2022):
+        soup = get_state_data(y)
+        i = 9
+        state = []
+        while i < len(soup.find_all('th')):
+            state.append(soup.find_all('th')[i].text.strip())
+            i += 1
+        gdp = []
+        i = 5
+        while i < len(soup.find_all('td')):
+            gdp.append(soup.find_all('td')[i].text.strip())
+            i += 4
+        result = {}
+        
+
+
+extract_state_data()
