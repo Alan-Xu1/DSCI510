@@ -1,0 +1,21 @@
+1.	What are the strengths of your data modeling format?
+I use the state abbreviations as the keys that connect all three of my tables in the SQL data base. SQL database makes adding additional
+information quite easy and generally most information pertaining to my project will include state names. SQL database also supports easy
+reordering, union or disjoint operations should I need it.
+
+2.	What are the weaknesses?  (Does your data model support?  Sorting the information? Re-ordering it?  Only obtaining a certain subset of the information?)
+I think the biggest weakness in the SQL database is that primary keys need to be unique which is problematic becaue my state COVID cases tables
+include the state names multiple times since it is a time series data. However it does not impeded too much on my analysis because I am only looking
+at total COVID cases in 2021 and 2022 which means I can just subset the table to avoid this issue.
+
+3.	How do you store your data on disk?
+The database is automatically managed by SQLITE3 and stored on local disk.
+
+4.	Let’s say you find another data source that relates to all 3 of your data sources (i.e. a data source that relates to your existing data).  
+How would you extend your model to include this new data source?  How would that change the interface?  
+The fact that I chose SQL database as the model makes the addition of another data source really easy. The data source could just be
+appended as another table and use state names as the key to relate to other tables.
+
+5.	How would you add a new attribute to your data (for example: imagine you had a lat/long column in a database.  You might use that to access an API to get a city name.  How would you add city name to your data?)  
+SQL tables lend themselves well to be processed as pandas dataframe. I can just export the table out of my SQL database into pandas and insert
+new columns into the table and store the modified table back into the SQL database.
