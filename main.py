@@ -3,9 +3,6 @@ import pandas as pd
 import streamlit as st
 import sqlite3
 import pandas.io.sql as psql
-import pydeck as pdk
-import os
-import matplotlib.pyplot as plt
 import numpy
 
 @st.cache_data
